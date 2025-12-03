@@ -2,13 +2,10 @@ import streamlit as st
 from datetime import datetime
 from scapy.all import sniff, IP, IPv6, TCP, UDP, ICMP, ARP
 
-# Storage for packet summaries
 captured_packets = []
 
 def packet_info(packet):
-    """
-    Generate a readable summary of a captured network packet.
-    """
+
     timestamp = datetime.now().strftime("%H:%M:%S.%f")[:-3]
     source = destination = protocol = src_port = dst_port = "N/A"
 
@@ -66,9 +63,7 @@ def packet_info(packet):
     return f"{timestamp}  Packet Type: Unrecognized"
 
 def record(packet):
-    """
-    Callback function executed on each captured packet.
-    """
+    
     summary = packet_info(packet)
     captured_packets.append(summary)
     st.session_state.packet_logs.append(summary)
